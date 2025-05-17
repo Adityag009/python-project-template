@@ -1,4 +1,4 @@
-.PHONY: install test lint format clean
+.PHONY: install test lint format clean api
 
 install:
 	pip install -e ".[dev]"
@@ -15,6 +15,9 @@ lint:
 format:
 	black src tests
 	isort src tests
+
+api:
+	python -m src.api.server --reload
 
 clean:
 	rm -rf build/

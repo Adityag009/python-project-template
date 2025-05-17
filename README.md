@@ -55,6 +55,7 @@ The flat layout places package code directly at the project root level, without 
 - Makefile for common commands
 - Structured for data science/ML projects
 - CI/CD ready
+- FastAPI integration for REST API development
 
 ## Project Structure
 
@@ -62,23 +63,27 @@ The flat layout places package code directly at the project root level, without 
 project/
 ├── src/                    # Source code (main package)
 │   ├── __init__.py
-│   ├── data/              # Data processing modules
-│   ├── models/            # ML/AI model implementations
-│   └── utils/             # Helper functions
-├── tests/                 # Unit and integration tests
-│   ├── unit/              # Unit tests
-│   └── integration/       # Integration tests
-├── data/                  # Data files (often gitignored)
+│   ├── api/                # FastAPI application
+│   │   ├── __init__.py
+│   │   ├── app.py          # FastAPI app and endpoints
+│   │   └── server.py       # Server startup functionality
+│   ├── data/               # Data processing modules
+│   ├── models/             # ML/AI model implementations
+│   └── utils/              # Helper functions
+├── tests/                  # Unit and integration tests
+│   ├── unit/               # Unit tests
+│   └── integration/        # Integration tests
+├── data/                   # Data files (often gitignored)
 │   ├── raw/
 │   └── processed/
-├── notebooks/             # Jupyter notebooks for exploration
-├── config/                # Configuration files
-├── scripts/               # Utility scripts
-├── Dockerfile             # Containerization instructions
-├── Makefile               # Common automation commands
-├── .gitignore             # Specifies intentionally untracked files
-├── pyproject.toml         # Modern Python packaging config
-└── README.md              # Project overview and instructions
+├── notebooks/              # Jupyter notebooks for exploration
+├── config/                 # Configuration files
+├── scripts/                # Utility scripts
+├── Dockerfile              # Containerization instructions
+├── Makefile                # Common automation commands
+├── .gitignore              # Specifies intentionally untracked files
+├── pyproject.toml          # Modern Python packaging config
+└── README.md               # Project overview and instructions
 ```
 
 ## Benefits of This Structure
@@ -113,6 +118,12 @@ project/
    python -m src.hello
    ```
 
+5. Run the API server:
+   ```bash
+   python -m src.api.server
+   ```
+   Then visit http://127.0.0.1:8000/docs to see the API documentation.
+
 ## Development
 
 - Format code: `make format`
@@ -120,13 +131,23 @@ project/
 - Run tests: `make test`
 - Clean build files: `make clean`
 
+## API Documentation
+
+The template includes a FastAPI application with the following endpoints:
+
+- **GET /** - Root endpoint with API information
+- **POST /greeting** - Create a personalized greeting
+- **GET /config** - Get the application configuration
+
+Access the interactive API documentation at http://127.0.0.1:8000/docs when the server is running.
+
 ## Docker
 
 Build and run the Docker container:
 
 ```bash
 docker build -t python-project .
-docker run python-project
+docker run -p 8000:8000 python-project
 ```
 
 ## Best Practices Implemented
@@ -140,14 +161,15 @@ This template implements several Python best practices:
 5. **Dependency Management**: Clear specification of dependencies
 6. **Environment Isolation**: Docker support for consistent environments
 7. **Documentation**: Comprehensive README and docstrings
+8. **API Design**: FastAPI for modern, type-safe API development with automatic documentation
 
 ## Extending the Template
 
 This template is designed to be adaptable. Here are some ways you might extend it:
 
 1. **Add CI/CD**: Integration with GitHub Actions, GitLab CI, or other CI/CD systems
-2. **API Layer**: Add FastAPI or Flask for RESTful APIs
-3. **Database Integration**: Add SQLAlchemy or ORM of choice
+2. **Database Integration**: Add SQLAlchemy or ORM of choice
+3. **Authentication**: Add authentication to the API endpoints
 4. **Logging**: Implement structured logging
 5. **Monitoring**: Add instrumentation for performance monitoring
 6. **Documentation**: Extend with Sphinx for auto-generated documentation
