@@ -1,0 +1,29 @@
+# Default configuration file
+# This is an example configuration file showing how to use YAML for project settings
+
+# Application settings
+app:
+  name: python-project-template
+  version: 0.1.0
+  debug: true
+
+# Logging settings
+logging:
+  level: INFO
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: logs/app.log
+
+# Data settings
+data:
+  raw_dir: data/raw
+  processed_dir: data/processed
+  cache_dir: data/cache
+
+# Model settings
+model:
+  type: example
+  parameters:
+    learning_rate: 0.01
+    batch_size: 64
+    epochs: 10
+  save_dir: models/saved 
